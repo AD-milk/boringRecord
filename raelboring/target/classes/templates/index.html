@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" /><br>
+hello
+<br>
+<br>
+<br>
+<br>
+<div id="cal-heatmap"></div>
+
+
+<script type="text/javascript">
+    var test = setTimeout(function(){
+        console.log("hello");
+    },0);
+
+    var datas = {};
+    var start = new Date("2020-1-1".replace(/-/g, "/"));
+    var end = new Date("2020-12-31".replace(/-/g, "/"));
+
+
+    var value = Math.floor(Math.random() * 30);
+    var startYML = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate();
+    var timeStamp = (Date.parse(startYML)) / 1000;
+
+    let val={};
+    val[timeStamp]=value;
+    val[timeStamp]=value;
+    do {
+        var value = Math.floor(Math.random() * 30);
+        var startYML = start.getFullYear() + "-" + (start.getMonth() + 1) + "-" + start.getDate();
+        var timeStamp = (Date.parse(startYML)) / 1000;
+        datas[timeStamp] = value;
+        start.setDate(start.getDate() + 1);
+    } while (end >= start);
+    console.log(datas)
+    var firstday = new Date();
+    firstday.setDate(1);
+    firstday.setMonth(0);
+    var cal = new CalHeatMap();
+    cal.init({
+        //from 2017,0,1
+        start: firstday,
+        data: datas,
+        domain: "month",
+        subDomain: "day",
+        // subDomain: "x_day",
+        range: 12,
+        tooltip: true,
+        cellsize: 15,
+        cellpadding: 3,
+        domainGutter: 15,
+        cellSize: 10,
+        // displayLegend: false
+    });
+
+    var cande=new CalHeatMap();
+    cande.init({
+        start: firstday,
+        data:val,
+        domain: "month",
+        subDomain: "day",
+        // subDomain: "x_day",
+        range: 12,
+        tooltip: true,
+        cellsize: 15,
+        cellpadding: 3,
+        domainGutter: 15,
+        cellSize: 10,
+    });
+</script>
+
+</body>
+</html>

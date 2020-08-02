@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boring.dao.CalDateDao">
+    <select id="queryCalDateList" resultType="com.example.boring.pojo.CalDate">
+        SELECT
+               DATE_FORMAT(boringtime,'%Y-%m-%d') as time,
+               count(boringtime) as num
+        from boring_record
+        group by time;
+    </select>
+    <select id="queryFirstFive" resultType="com.example.boring.pojo.FullDate">
+        select boringtime,boringtext from boring_record  order by id desc limit 5
+    </select>
+    <insert id="insertRecordText" parameterType="com.example.boring.pojo.FullDate">
+        insert into boring_record(boringtime,boringtext,boringvalue) values (#{boringtime},#{boringtext},1)
+    </insert>
+</mapper>
